@@ -1,0 +1,14 @@
+{
+  "Enter your Duck Address":"Enter your Duck Address",
+  "No Duck Address":"No Duck Address? Go to Sign Up!",
+  "Continue":"Continue",
+  "Duck Address cannot be empty":"Duck Address cannot be empty!",
+  "Duck Address can only contain letters and numbers":"Duck Address can only contain letters and numbers!",
+  "Check your inbox":"Check your inbox!",
+  "DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue":"DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue!",
+  "Enter your one-time passphrase":"Enter your one-time passphrase",
+  "Back":"Back",
+  "One-time Passphrase cannot be empty":"One-time Passphrase cannot be empty!",
+  "Login failed":"Login failed",
+  "Unauthorized":"One-time Passphrase does not match or has expired, please try again."
+}
