@@ -1,8 +1,23 @@
+import { UserInfo } from '../types'
+
 export function getAccount(index: number) {
   const data = localStorage.getItem('user')
-  if (!data) throw Error('Account not found')
+  if (!data) {
+    console.error('Account not found')
+    return null
+  }
   const obj = JSON.parse(data)
   return obj[index]
+}
+
+export function getAllAccount() {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    console.error('Account not found')
+    return null
+  }
+  const obj = JSON.parse(user)
+  return obj
 }
 
 export function addAccount({
@@ -18,23 +33,35 @@ export function addAccount({
   username: string
   nextAlias: string
 }) {
-  const user = {
+  const userInfo = {
     access_token,
     cohort,
     remark,
     username,
     nextAlias,
   }
-  const data = localStorage.getItem('user')
-  if (!data) {
-    localStorage.setItem('user', JSON.stringify([user]))
+  const allUser = getAllAccount()
+  if (!allUser) {
+    localStorage.setItem('user', JSON.stringify([userInfo]))
     return 0
   } else {
-    const obj = JSON.parse(data)
-    obj.push(user)
+    const obj = JSON.parse(allUser)
+    obj.push(userInfo)
     localStorage.setItem('user', JSON.stringify(obj))
     return obj.length - 1
   }
+}
+
+export function editAccount(index: number, userInfo: UserInfo) {
+  const allUser = getAllAccount()
+  const user = allUser[index]
+  if (!allUser[index]) {
+    console.error('Account not found')
+    return false
+  }
+  allUser[index] = { ...user, ...userInfo }
+  localStorage.setItem('user', JSON.stringify(allUser))
+  return allUser[index]
 }
 
 export function clear() {

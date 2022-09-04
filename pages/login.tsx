@@ -19,6 +19,7 @@ import { USERNAME_REGEX } from '../lib/constants'
 import fetch from '../utils/fetch'
 import * as store from '../utils/store'
 import maskEmail from '../utils/maskEmail'
+import generateAddresses from '../utils/generateAddresses'
 
 const usernameAtom = atom<string>('')
 const otpAtom = atom<string>('')
@@ -53,7 +54,8 @@ const EnterUsername = () => {
 
   const usernameHandleChange = (event: { target: { value: string } }) =>
     setUsername(event.target.value)
-  const continueHandle = () => {
+  const continueHandle = (event: { preventDefault: () => void }) => {
+    event.preventDefault()
     if (username == '') {
       toast({
         description: t('Duck Address cannot be empty'),
@@ -97,30 +99,26 @@ const EnterUsername = () => {
       .finally(() => setLoading(false))
   }
   return (
-    <VStack spacing={6}>
-      <Heading as="h4" size="md">
-        {t('Enter your Duck Address')}
-      </Heading>
-      <InputGroup size="lg">
-        <Input
-          type="text"
-          value={username}
-          onChange={usernameHandleChange}
-          placeholder="Duck Address"
-        />
-        <InputRightAddon>@duck.com</InputRightAddon>
-      </InputGroup>
-      <Button
-        onClick={continueHandle}
-        isLoading={loading}
-        colorScheme="blue"
-        size="md"
-        width="100%"
-      >
-        {t('Continue')}
-      </Button>
-      <Button variant="link">{t('No Duck Address')}</Button>
-    </VStack>
+    <form onSubmit={continueHandle}>
+      <VStack spacing={6}>
+        <Heading as="h4" size="md">
+          {t('Enter your Duck Address')}
+        </Heading>
+        <InputGroup size="lg">
+          <Input
+            type="text"
+            value={username}
+            onChange={usernameHandleChange}
+            placeholder="Duck Address"
+          />
+          <InputRightAddon>@duck.com</InputRightAddon>
+        </InputGroup>
+        <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
+          {t('Continue')}
+        </Button>
+        <Button variant="link">{t('No Duck Address')}</Button>
+      </VStack>
+    </form>
   )
 }
 
@@ -134,7 +132,8 @@ const EnterOtp = () => {
   const router = useRouter()
 
   const otpHandleChange = (event: { target: { value: string } }) => setOtp(event.target.value)
-  const continueHandle = () => {
+  const continueHandle = (event: { preventDefault: () => void }) => {
+    event.preventDefault()
     if (otp == '') {
       toast({
         description: t('One-time Passphrase cannot be empty'),
@@ -154,12 +153,28 @@ const EnterOtp = () => {
             username: string
           }
         }
-        const userIndex = store.addAccount({
-          ...user,
-          remark: maskEmail(user.email),
-          nextAlias: '',
-        })
-        router.push(`/account/${userIndex}`)
+        // generate alias
+        generateAddresses(user.access_token)
+          .then((res) => {
+            const userIndex = store.addAccount({
+              ...user,
+              remark: maskEmail(user.email),
+              nextAlias: res.address,
+            })
+            // redirect
+            router.push(`/email/?id=${userIndex}`)
+          })
+          .catch((res) => {
+            console.log('generate alias error', res)
+            const userIndex = store.addAccount({
+              ...user,
+              remark: maskEmail(user.email),
+              nextAlias: '',
+            })
+            // redirect
+            router.push(`/email/?id=${userIndex}`)
+            return
+          })
       })
       .catch((res) => {
         console.log('login error', res)
@@ -192,44 +207,41 @@ const EnterOtp = () => {
       .finally(() => setLoading(false))
   }
   return (
-    <VStack spacing={6}>
-      <Heading as="h4" size="md">
-        {t('Check your inbox')}
-      </Heading>
-      <Text textAlign="center">
-        {t(
-          'DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue'
-        )}
-      </Text>
-      <Input
-        type="text"
-        value={otp}
-        onChange={otpHandleChange}
-        placeholder={t('Enter your one-time passphrase')}
-        size="lg"
-      />
-      <Button
-        onClick={continueHandle}
-        isLoading={loading}
-        colorScheme="blue"
-        size="md"
-        width="100%"
-      >
-        {t('Continue')}
-      </Button>
-      <Button
-        variant="link"
-        onClick={() => {
-          setStep('EnterUsername')
-        }}
-      >
-        {t('Back')}
-      </Button>
-    </VStack>
+    <form onSubmit={continueHandle}>
+      <VStack spacing={6}>
+        <Heading as="h4" size="md">
+          {t('Check your inbox')}
+        </Heading>
+        <Text textAlign="center">
+          {t(
+            'DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue'
+          )}
+        </Text>
+        <Input
+          type="text"
+          value={otp}
+          onChange={otpHandleChange}
+          placeholder={t('Enter your one-time passphrase')}
+          size="lg"
+        />
+        <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
+          {t('Continue')}
+        </Button>
+        <Button
+          variant="link"
+          onClick={() => {
+            setOtp('')
+            setStep('EnterUsername')
+          }}
+        >
+          {t('Back')}
+        </Button>
+      </VStack>
+    </form>
   )
 }
 
-const Login: NextPage = () => {
+const LoginPage: NextPage = () => {
   const [step] = useAtom(stepAtom)
   if (step == 'EnterUsername') {
     return (
@@ -256,4 +268,4 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   }
 }
 
-export default Login
+export default LoginPage
