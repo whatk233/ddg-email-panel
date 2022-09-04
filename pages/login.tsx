@@ -12,6 +12,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import CenterBox from '../components/Layout/CenterBox'
@@ -109,14 +110,18 @@ const EnterUsername = () => {
             type="text"
             value={username}
             onChange={usernameHandleChange}
-            placeholder="Duck Address"
+            placeholder={t('Duck Address')}
           />
           <InputRightAddon>@duck.com</InputRightAddon>
         </InputGroup>
         <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
           {t('Continue')}
         </Button>
-        <Button variant="link">{t('No Duck Address')}</Button>
+        <Link href="https://duckduckgo.com/email/start" target="_blank" passHref>
+          <a target="_blank" rel="noopener noreferrer">
+            <Button variant="link">{t('No Duck Address')}</Button>
+          </a>
+        </Link>
       </VStack>
     </form>
   )
