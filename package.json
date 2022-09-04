@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@hapi/boom": "^10.0.0",
+    "cookies-next": "^2.1.1",
     "framer-motion": "^7.2.1",
     "jotai": "^1.8.1",
     "next": "12.2.5",

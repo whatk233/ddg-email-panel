@@ -1,5 +1,6 @@
-import { Flex, Center, Spacer, HStack, IconButton, Image, Text } from '@chakra-ui/react'
+import { Flex, Center, Spacer, IconButton, Image, Text } from '@chakra-ui/react'
 import { AiFillGithub } from 'react-icons/ai'
+import SwitchLang from '../SwitchLang'
 
 export default function Nav() {
   return (
@@ -18,9 +19,8 @@ export default function Nav() {
       </Flex>
       <Spacer />
       <Flex>
-        <HStack>
-          <IconButton colorScheme="gray" aria-label="Github" icon={<AiFillGithub />} />
-        </HStack>
+        <IconButton colorScheme="gray" aria-label="Github" icon={<AiFillGithub />} mx="0.5rem" />
+        <SwitchLang mx="0.5rem" />
       </Flex>
     </Flex>
   )
