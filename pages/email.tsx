@@ -15,8 +15,9 @@ const userInfoAtom = atom<UserInfo | null>(null)
 const loadingAtom = atom<boolean>(true)
 
 const Loading = () => {
+  const { t } = useTranslation('common')
   return (
-    <CenterBox>
+    <CenterBox title={t('loading')}>
       <Spinner thickness="2px" speed="0.65s" emptyColor="gray.200" color="blue.600" size="xl" />
     </CenterBox>
   )
@@ -47,6 +48,7 @@ const Email = () => {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
   const [generateBtnStatus, setGenerateBtnStatus] = useState<boolean>(false)
   const { t } = useTranslation('email')
+  const tcommon = useTranslation('common')
   const toast = useToast()
   const generateAddressesHandle = () => {
     setGenerateBtnStatus(true)
@@ -59,7 +61,7 @@ const Email = () => {
         if (res?.status) {
           if (res?.status == 401) {
             toast({
-              title: t('Generate failed'),
+              title: t('email.Generate failed'),
               description: t('Unauthorized'),
               status: 'error',
               isClosable: true,
@@ -93,7 +95,7 @@ const Email = () => {
 
   if (userInfo) {
     return (
-      <CenterBox>
+      <CenterBox title={tcommon.t('myemail')}>
         <VStack w="100%" spacing={6}>
           <Box w="100%">
             <Text fontWeight="medium">{t('Main Duck Address')}</Text>

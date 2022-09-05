@@ -248,16 +248,17 @@ const EnterOtp = () => {
 
 const LoginPage: NextPage = () => {
   const [step] = useAtom(stepAtom)
+  const { t } = useTranslation('common')
   if (step == 'EnterUsername') {
     return (
-      <CenterBox>
+      <CenterBox title={t('login')}>
         <EnterUsername />
       </CenterBox>
     )
   }
   if (step == 'EnterOtp') {
     return (
-      <CenterBox>
+      <CenterBox title={t('login')}>
         <EnterOtp />
       </CenterBox>
     )
