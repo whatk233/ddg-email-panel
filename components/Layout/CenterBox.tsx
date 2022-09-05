@@ -1,7 +1,9 @@
-import { Box, Center, Flex } from '@chakra-ui/react'
+import { Box, Center, Flex, Text } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import Nav from './Nav'
 
 export default function CenterBox({ children, ...props }: { children: React.ReactNode }) {
+  const { t } = useTranslation('common')
   return (
     <Box minH="100vh" bg="gray.50" {...props}>
       <Nav />
@@ -20,6 +22,11 @@ export default function CenterBox({ children, ...props }: { children: React.Reac
         >
           {children}
         </Flex>
+      </Center>
+      <Center>
+        <Text fontSize="xs" w="600px" align="center" color="blackAlpha.500">
+          {t('DDG Email Panel respects your privacy')}
+        </Text>
       </Center>
     </Box>
   )

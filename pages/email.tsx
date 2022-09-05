@@ -181,7 +181,7 @@ const EmailPage: NextPage = () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
-      ...(await serverSideTranslations(ctx.locale || 'en', ['email'])),
+      ...(await serverSideTranslations(ctx.locale || 'en', ['common', 'email'])),
     },
   }
 }
