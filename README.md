@@ -1,6 +1,6 @@
 # DDG Email Panel
 
-<a href='https://github.com/whatk233/ddg-email-panel/README-CN.md'>简体中文</a>
+<a href='https://github.com/whatk233/ddg-email-panel/blob/main/README-CN.md'>简体中文</a>
 
 > Open source unofficial [DuckDuckGo Email Protection](https://duckduckgo.com/email) panel.
 
