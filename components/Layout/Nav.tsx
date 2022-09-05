@@ -1,5 +1,6 @@
 import { Flex, Center, Spacer, IconButton, Image, Text } from '@chakra-ui/react'
 import { AiFillGithub } from 'react-icons/ai'
+import Link from 'next/link'
 import SwitchLang from '../SwitchLang'
 
 export default function Nav() {
@@ -15,7 +16,16 @@ export default function Nav() {
       </Flex>
       <Spacer />
       <Flex>
-        <IconButton colorScheme="gray" aria-label="Github" icon={<AiFillGithub />} mx="0.5rem" />
+        <Link href="https://github.com/whatk233/ddg-email-panel" target="_blank" passHref>
+          <a target="_blank" rel="noopener noreferrer">
+            <IconButton
+              colorScheme="gray"
+              aria-label="Github"
+              icon={<AiFillGithub />}
+              mx="0.5rem"
+            />
+          </a>
+        </Link>
         <SwitchLang mx="0.5rem" />
       </Flex>
     </Flex>
