@@ -15,9 +15,8 @@ const userInfoAtom = atom<UserInfo | null>(null)
 const loadingAtom = atom<boolean>(true)
 
 const Loading = () => {
-  const { t } = useTranslation('common')
   return (
-    <CenterBox title={t('loading')}>
+    <CenterBox>
       <Spinner thickness="2px" speed="0.65s" emptyColor="gray.200" color="blue.600" size="xl" />
     </CenterBox>
   )
