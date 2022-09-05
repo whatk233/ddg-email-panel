@@ -4,7 +4,7 @@
 
 > 开源的非官方 [DuckDuckGo Email Protection](https://duckduckgo.com/email) 面板。
 
-![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk/ddg-email-panel?style=social)
+![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/ddg-email-panel?style=social)
 
 ## ⭐ 特性
 * 无需安装 DuckDuckGo 浏览器扩展

@@ -4,7 +4,7 @@
 
 > Open source unofficial [DuckDuckGo Email Protection](https://duckduckgo.com/email) panel.
 
-![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk/ddg-email-panel?style=social)
+![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/ddg-email-panel?style=social)
 
 ## ⭐ Features
 * No need to install DuckDuckGo browser extension
