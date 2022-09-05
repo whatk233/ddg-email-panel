@@ -1,5 +1,7 @@
 # DDG Email Panel
 
+<a href='https://github.com/whatk233/ddg-email-panel/README.md'>English</a>
+
 > 开源的非官方 [DuckDuckGo Email Protection](https://duckduckgo.com/email) 面板。
 
 ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk/ddg-email-panel?style=social)
@@ -48,7 +50,7 @@ npm run start
 ```
 
 ## ❤️ 支持
-<a href='https://ko-fi.com/whatk' target='_blank'>Buy Me a Coffee</a> · <a href='https://afdian.net/@whatk' target='_blank'>爱发电</a>
+<a href='https://afdian.net/@whatk' target='_blank'>爱发电</a> · <a href='https://ko-fi.com/whatk' target='_blank'>Buy Me a Coffee</a>
 
 ## License
 MIT
