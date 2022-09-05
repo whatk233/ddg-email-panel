@@ -1,7 +1,20 @@
 {
   "name": "ddg-email-panel",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description":"DDG Email Panel is the open source unofficial DuckDuckGo Email Protection panel.",
+  "author": "Whatk <i@whatk.me>",
+  "homepage": "https://duckduckgo.email/",
+  "keywords": [
+    "duckduckgo",
+    "duckduckgo-email",
+    "nextjs",
+    "react"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatk233/ddg-email-panel.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
