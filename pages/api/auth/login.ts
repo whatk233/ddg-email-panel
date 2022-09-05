@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { createRouter } from 'next-connect'
 import Boom from '@hapi/boom'
-import apiHandler, { handler as errHandler } from '../../../lib/apiHandler'
+import { handler as errHandler } from '../../../lib/apiHandler'
 import { login as ddgLogin, getAccessToken } from '../../../lib/ddgEmailApi'
+
+const router = createRouter<NextApiRequest, NextApiResponse>()
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
   const { username, otp } = req.body
@@ -34,4 +37,4 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     })
 }
 
-export default apiHandler.post(login).handler(errHandler)
+export default router.post(login).handler(errHandler)
