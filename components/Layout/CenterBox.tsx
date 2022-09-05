@@ -15,7 +15,9 @@ export default function CenterBox({ children, ...props }: { children: React.Reac
           boxShadow="base"
           rounded="lg"
           color="black"
-          p="5rem"
+          p={{ base: '1.5rem', md: '5rem' }}
+          m={{ base: '1rem' }}
+          mt="2rem"
           align="center"
           direction="column"
           justify="center"
@@ -24,7 +26,7 @@ export default function CenterBox({ children, ...props }: { children: React.Reac
         </Flex>
       </Center>
       <Center>
-        <Text fontSize="xs" w="600px" align="center" color="blackAlpha.500">
+        <Text px={{ base: '2rem' }} fontSize="xs" w="600px" align="center" color="blackAlpha.500">
           {t('DDG Email Panel respects your privacy')}
         </Text>
       </Center>
