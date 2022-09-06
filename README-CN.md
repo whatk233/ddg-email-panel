@@ -4,7 +4,9 @@
 
 > 开源的非官方 [DuckDuckGo Email Protection](https://duckduckgo.com/email) 面板。
 
-![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel) ![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/ddg-email-panel?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/ddg-email-panel?style=social)
+
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=Vercel&logoColor=white) ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel?style=for-the-badge) 
 
 ## ⭐ 特性
 * 无需安装 DuckDuckGo 浏览器扩展
@@ -19,6 +21,9 @@
 * 修改转发地址
 * DuckDuckGo Email 账户注销
 * 夜间模式
+
+## 🌏 在线使用
+[DDG Email Panel](https://duckduckgo.email)
 
 ## 🚀 快速部署
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fduckduckgo.email)
