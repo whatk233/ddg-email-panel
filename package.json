@@ -1,7 +1,7 @@
 {
   "name": "ddg-email-panel",
   "version": "1.0.0",
-  "description":"DDG Email Panel is the open source unofficial DuckDuckGo Email Protection panel.",
+  "description": "DDG Email Panel is the open source unofficial DuckDuckGo Email Protection panel.",
   "author": "Whatk <i@whatk.me>",
   "homepage": "https://duckduckgo.email/",
   "keywords": [
@@ -32,6 +32,7 @@
     "next": "12.2.5",
     "next-connect": "1.0.0-next.3",
     "next-i18next": "^12.0.0",
+    "next-pwa": "^5.6.0",
     "node-fetch": "^3.2.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
