@@ -117,10 +117,13 @@ const EnterUsername = () => {
         <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
           {t('Continue')}
         </Button>
-        <Link href="https://duckduckgo.com/email/start" target="_blank" passHref>
-          <a target="_blank" rel="noopener noreferrer">
-            <Button variant="link">{t('No Duck Address')}</Button>
-          </a>
+        <Link
+          href="https://duckduckgo.com/email/start"
+          target="_blank"
+          passHref
+          rel="noopener noreferrer"
+        >
+          <Button variant="link">{t('No Duck Address')}</Button>
         </Link>
       </VStack>
     </form>

@@ -16,15 +16,13 @@ export default function Nav() {
       </Flex>
       <Spacer />
       <Flex>
-        <Link href="https://github.com/whatk233/ddg-email-panel" target="_blank" passHref>
-          <a target="_blank" rel="noopener noreferrer">
-            <IconButton
-              colorScheme="gray"
-              aria-label="Github"
-              icon={<AiFillGithub />}
-              mx="0.5rem"
-            />
-          </a>
+        <Link
+          href="https://github.com/whatk233/ddg-email-panel"
+          target="_blank"
+          passHref
+          rel="noopener noreferrer"
+        >
+          <IconButton colorScheme="gray" aria-label="Github" icon={<AiFillGithub />} mx="0.5rem" />
         </Link>
         <SwitchLang mx="0.5rem" />
       </Flex>

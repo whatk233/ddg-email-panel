@@ -6,7 +6,7 @@ import { setCookie } from 'cookies-next'
 
 const SwitchBtn = ({ text, href, locale }: { text: string; href: string; locale: string }) => {
   return (
-    <Link href={href} locale={locale}>
+    <Link href={href} locale={locale} legacyBehavior>
       <MenuItem
         onClick={() => {
           setCookie('NEXT_LOCALE', locale)
@@ -15,7 +15,7 @@ const SwitchBtn = ({ text, href, locale }: { text: string; href: string; locale:
         {text}
       </MenuItem>
     </Link>
-  )
+  );
 }
 
 export default function SwitchLang({ ...prop }) {
