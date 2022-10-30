@@ -126,23 +126,23 @@ function NavMain() {
         <div className="grid items-start gap-1">
           {uRouter.route == '/login'
             ? notLoginNavItem.map((item, index) => (
-                <NavLink
-                  key={index}
-                  title={item.title}
-                  href={item.href}
-                  icon={item.icon}
-                  router={item.router}
-                />
-              ))
+              <NavLink
+                key={index}
+                title={item.title}
+                href={item.href}
+                icon={item.icon}
+                router={item.router}
+              />
+            ))
             : navItem.map((item, index) => (
-                <NavLink
-                  key={index}
-                  title={item.title}
-                  href={item.href}
-                  icon={item.icon}
-                  router={item.router}
-                />
-              ))}
+              <NavLink
+                key={index}
+                title={item.title}
+                href={item.href}
+                icon={item.icon}
+                router={item.router}
+              />
+            ))}
         </div>
         <div>
           <NavLink title={t('nav.theme')} href="#" icon={<MoonIcon />} />
