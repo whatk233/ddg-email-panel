@@ -2,11 +2,13 @@ import type { GetStaticProps, NextPage } from 'next'
 import type { UserInfo } from '../types'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, VStack, Text, Flex, Button, Spinner, Skeleton, useToast } from '@chakra-ui/react'
+import toast from 'react-hot-toast'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { atom, useAtom } from 'jotai'
-import CenterBox from '../components/Layout/CenterBox'
+import { DocumentDuplicateIcon, SparklesIcon } from '@heroicons/react/24/solid'
+import { CgSpinner } from 'react-icons/cg'
+import Layout from '../components/Layout/Layout'
 import * as store from '../utils/store'
 import generateAddresses from '../utils/generateAddresses'
 
@@ -16,19 +18,22 @@ const loadingAtom = atom<boolean>(true)
 
 const Loading = () => {
   return (
-    <CenterBox>
-      <Spinner thickness="2px" speed="0.65s" emptyColor="gray.200" color="blue.600" size="xl" />
-    </CenterBox>
+    <Layout
+      title={`Loading`}
+      className="flex flex-col h-[calc(100vh_-_120px)] items-center justify-center"
+    >
+      <CgSpinner className="w-8 h-8 text-slate-500 animate-spin" />
+    </Layout>
   )
 }
 
-const CopyBtn = ({ text }: { text: string }) => {
-  const { t } = useTranslation('email')
+const CopyBtn = ({ text, disabled = false }: { text: string; disabled?: boolean }) => {
+  const { t } = useTranslation('common')
   const [status, setStatus] = useState<boolean>(true)
   return (
-    <Button
-      size="sm"
-      disabled={!status}
+    <button
+      className="flex items-center justify-center bg-sky-600 text-white px-2 py-1 h-8 rounded-md shadow text-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+      disabled={!status || disabled}
       onClick={() => {
         setStatus(false)
         navigator.clipboard.writeText(text)
@@ -37,18 +42,17 @@ const CopyBtn = ({ text }: { text: string }) => {
         }, 2000)
       }}
     >
+      <DocumentDuplicateIcon className="w-4 mr-1" />
       {status ? t('Copy') : t('Copied')}
-    </Button>
+    </button>
   )
 }
 
 const Email = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
   const [generateBtnStatus, setGenerateBtnStatus] = useState<boolean>(false)
-  const { t } = useTranslation('email')
-  const tcommon = useTranslation('common')
-  const toast = useToast()
+  const { t } = useTranslation('common')
   const generateAddressesHandle = () => {
     setGenerateBtnStatus(true)
     generateAddresses(userInfo?.access_token || '')
@@ -59,27 +63,12 @@ const Email = () => {
       .catch((res) => {
         if (res?.status) {
           if (res?.status == 401) {
-            toast({
-              title: t('email.Generate failed'),
-              description: t('Unauthorized'),
-              status: 'error',
-              isClosable: true,
-            })
+            toast.error(`${t('Generate failed')} - ${t('Unauthorized.1')}`)
           } else {
-            toast({
-              title: t('Generate Error'),
-              description: `${res.status} - ${res.statusText}`,
-              status: 'error',
-              isClosable: true,
-            })
+            toast.error(`${t('Generate failed')} - (${res.status} - ${res.statusText})`)
           }
         } else {
-          toast({
-            title: t('Error'),
-            description: res.message,
-            status: 'error',
-            isClosable: true,
-          })
+          toast(`${t('Error')} - ${res.message}`)
         }
       })
       .finally(() => {
@@ -87,59 +76,69 @@ const Email = () => {
       })
   }
 
-  const signOutHandle = () => {
-    store.clear()
-    router.reload()
-  }
+  // const signOutHandle = () => {
+  //   store.clear()
+  //   router.reload()
+  // }
 
   if (userInfo) {
     return (
-      <CenterBox title={tcommon.t('myemail')}>
-        <VStack w="100%" spacing={6}>
-          <Box w="100%">
-            <Text fontWeight="medium">{t('Main Duck Address')}</Text>
-            <Flex justifyContent="space-between">
-              <Text fontSize="xl">{`${userInfo.username}@duck.com`}</Text>
+      <Layout
+        title={t('myemail')}
+        className="flex flex-col h-[calc(100vh_-_120px)] items-center justify-center max-w-xl mx-auto"
+      >
+        <div className="grid grid-cols-1 gap-6">
+          <div className="w-full">
+            <p className="font-medium">{t('Main Duck Address')}</p>
+            <div className="flex justify-between">
+              <p className="text-xl">{`${userInfo.username}@duck.com`}</p>
               <CopyBtn text={`${userInfo.username}@duck.com`} />
-            </Flex>
-          </Box>
-          <Box w="100%">
-            <Text fontWeight="medium">{t('Private Duck Address')}</Text>
-            <Flex justifyContent="space-between">
-              <Skeleton height="1.25rem" my="6px" isLoaded={userInfo?.nextAlias !== ''}>
-                <Text fontSize="xl">{`${userInfo?.nextAlias}@duck.com`}</Text>
-              </Skeleton>
-              <CopyBtn text={`${userInfo.nextAlias}@duck.com`} />
-            </Flex>
-          </Box>
-          <Button
+            </div>
+          </div>
+          <div className="w-full">
+            <p className="font-medium">{t('Private Duck Address')}</p>
+            <div className="flex justify-between">
+              {userInfo?.nextAlias == '' ? (
+                <div className="max-w-sm animate-pulse h-3 my-3 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4" />
+              ) : (
+                <p className="text-xl">{`${userInfo?.nextAlias}@duck.com`}</p>
+              )}
+              <CopyBtn
+                disabled={userInfo?.nextAlias == ''}
+                text={`${userInfo.nextAlias}@duck.com`}
+              />
+            </div>
+          </div>
+          <button
+            className={`flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed`}
+            disabled={generateBtnStatus}
             onClick={() => {
               generateAddressesHandle()
             }}
-            colorScheme="blue"
-            size="md"
-            width="100%"
-            isLoading={generateBtnStatus}
           >
+            {generateBtnStatus ? (
+              <CgSpinner className="w-5 h-5 mr-2 animate-spin" />
+            ) : (
+              <SparklesIcon className="w-5 h-5 mr-2" />
+            )}
             {t('Generate Private Duck Address')}
-          </Button>
-          <Text fontSize="sm" color="blackAlpha.700">
+          </button>
+          <div className="alert-success m-0">
             {t('For untrusted websites, Privacy Duck Addresses can hide your email identity')}
-          </Text>
-          <Button
-            onClick={() => {
-              signOutHandle()
-            }}
-            colorScheme="red"
-            variant="link"
-          >
-            {t('Sign Out')}
-          </Button>
-        </VStack>
-      </CenterBox>
+          </div>
+          <div className="alert-warn m-0 text-sm">{t('DDG Email Panel respects your privacy')}</div>
+        </div>
+      </Layout>
     )
   }
-  return <CenterBox>{t('Some Error')}</CenterBox>
+  return (
+    <Layout
+      title={t('Error')}
+      className="flex flex-col h-[calc(100vh_-_120px)] items-center justify-center"
+    >
+      {t('Some Error')}
+    </Layout>
+  )
 }
 
 const EmailPage: NextPage = () => {
@@ -182,7 +181,7 @@ const EmailPage: NextPage = () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
-      ...(await serverSideTranslations(ctx.locale || 'en', ['common', 'email'])),
+      ...(await serverSideTranslations(ctx.locale || 'en', ['common'])),
     },
   }
 }

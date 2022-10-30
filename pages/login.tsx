@@ -1,26 +1,18 @@
 import type { GetStaticProps, NextPage } from 'next'
-import React from 'react'
-import { atom, useAtom } from 'jotai'
-import {
-  VStack,
-  Heading,
-  InputGroup,
-  Input,
-  InputRightAddon,
-  Button,
-  Text,
-  useToast,
-} from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
+import { atom, useAtom } from 'jotai'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import CenterBox from '../components/Layout/CenterBox'
+import { EnvelopeIcon, KeyIcon } from '@heroicons/react/24/solid'
+import { CgSpinner } from 'react-icons/cg'
+import Layout from '../components/Layout/Layout'
 import { USERNAME_REGEX } from '../lib/constants'
 import fetch from '../utils/fetch'
+import generateAddresses from '../utils/generateAddresses'
 import * as store from '../utils/store'
 import maskEmail from '../utils/maskEmail'
-import generateAddresses from '../utils/generateAddresses'
 
 const usernameAtom = atom<string>('')
 const otpAtom = atom<string>('')
@@ -47,8 +39,7 @@ const loginRequest = (username: string, otp: string) => {
 }
 
 const EnterUsername = () => {
-  const { t } = useTranslation('login')
-  const toast = useToast()
+  const { t } = useTranslation('common')
   const [username, setUsername] = useAtom(usernameAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
   const [, setStep] = useAtom(stepAtom)
@@ -58,19 +49,11 @@ const EnterUsername = () => {
   const continueHandle = (event: { preventDefault: () => void }) => {
     event.preventDefault()
     if (username == '') {
-      toast({
-        description: t('Duck Address cannot be empty'),
-        status: 'error',
-        isClosable: true,
-      })
+      toast.error(t('Duck Address cannot be empty'))
       return
     }
     if (!USERNAME_REGEX.test(username)) {
-      toast({
-        description: t('Duck Address can only contain letters and numbers'),
-        status: 'error',
-        isClosable: true,
-      })
+      toast.error(t('Duck Address can only contain letters and numbers'))
       return
     }
     setLoading(true)
@@ -81,73 +64,82 @@ const EnterUsername = () => {
       .catch((res) => {
         console.log('send login link error', res)
         if (res?.status) {
-          toast({
-            title: 'Error',
-            description: `${res.status} - ${res.statusText}`,
-            status: 'error',
-            isClosable: true,
-          })
+          toast.error(`${res.status} - ${res.statusText}`)
         } else {
-          toast({
-            title: 'Error',
-            description: res.message,
-            status: 'error',
-            isClosable: true,
-          })
+          toast.error(`${res.message}`)
         }
         return
       })
       .finally(() => setLoading(false))
   }
   return (
-    <form onSubmit={continueHandle}>
-      <VStack spacing={6}>
-        <Heading as="h4" size="md">
-          {t('Enter your Duck Address')}
-        </Heading>
-        <InputGroup size="lg">
-          <Input
-            type="text"
-            value={username}
-            onChange={usernameHandleChange}
-            placeholder={t('Duck Address')}
-          />
-          <InputRightAddon>@duck.com</InputRightAddon>
-        </InputGroup>
-        <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
-          {t('Continue')}
-        </Button>
-        <Link
-          href="https://duckduckgo.com/email/start"
-          target="_blank"
-          passHref
-          rel="noopener noreferrer"
-        >
-          <Button variant="link">{t('No Duck Address')}</Button>
-        </Link>
-      </VStack>
-    </form>
+    <>
+      <div className="text-center">
+        <h4>{t('Enter your Duck Address')}</h4>
+        <p className="text-gray-500">{t('login tip')}</p>
+      </div>
+      <form onSubmit={continueHandle}>
+        <div className="flex flex-col items-center rounded-lg w-full md:w-8/12 lg:w-[500px] md:p-10 p-5">
+          {/* input */}
+          <div className="relative mt-1 rounded-md shadow-sm my-8 w-full">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <EnvelopeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
+            <input
+              type="text"
+              value={username}
+              onChange={usernameHandleChange}
+              placeholder={t('Duck Address')}
+              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm"
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <span className="h-full inline-flex items-center px-3 rounded-r-md border border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                @duck.com
+              </span>
+            </div>
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <CgSpinner className="w-5 h-5 mr-2 animate-spin" />
+                {t('loading')}
+              </>
+            ) : (
+              t('login')
+            )}
+          </button>
+          <Link
+            href="https://duckduckgo.com/email/start"
+            className="mt-3 hover:underline underline-offset-2 text-gray-600 hover:text-sky-500"
+            target="_blank"
+            passHref
+            rel="noopener noreferrer"
+          >
+            {t('No Duck Address')}
+          </Link>
+        </div>
+      </form>
+    </>
   )
 }
 
 const EnterOtp = () => {
-  const { t } = useTranslation('login')
+  const { t } = useTranslation('common')
   const [username] = useAtom(usernameAtom)
   const [otp, setOtp] = useAtom(otpAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
   const [, setStep] = useAtom(stepAtom)
-  const toast = useToast()
   const router = useRouter()
 
   const otpHandleChange = (event: { target: { value: string } }) => setOtp(event.target.value)
   const continueHandle = (event: { preventDefault: () => void }) => {
     event.preventDefault()
     if (otp == '') {
-      toast({
-        description: t('One-time Passphrase cannot be empty'),
-        status: 'error',
-        isClosable: true,
-      })
+      toast.error(t('One-time Passphrase cannot be empty'))
       return
     }
     setLoading(true)
@@ -183,87 +175,93 @@ const EnterOtp = () => {
             router.push(`/email/?id=${userIndex}`)
             return
           })
+          .finally(() => {
+            toast.success(t('Login Success'))
+          })
       })
       .catch((res) => {
         console.log('login error', res)
         if (res?.status) {
           if (res?.status == 401) {
-            toast({
-              title: t('Login failed'),
-              description: t('Unauthorized'),
-              status: 'error',
-              isClosable: true,
-            })
+            toast.error(t('Unauthorized'))
           } else {
-            toast({
-              title: 'Error',
-              description: `${res.status} - ${res.statusText}`,
-              status: 'error',
-              isClosable: true,
-            })
+            toast.error(`${res.status} - ${res.statusText}`)
           }
         } else {
-          toast({
-            title: 'Error',
-            description: res.message,
-            status: 'error',
-            isClosable: true,
-          })
+          toast.error(res.message)
         }
         return
       })
       .finally(() => setLoading(false))
   }
   return (
-    <form onSubmit={continueHandle}>
-      <VStack spacing={6}>
-        <Heading as="h4" size="md">
-          {t('Check your inbox')}
-        </Heading>
-        <Text textAlign="center">
+    <>
+      <div className="text-center">
+        <h4>{t('Check your inbox')}</h4>
+        <p className="text-gray-500">
           {t(
             'DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue'
           )}
-        </Text>
-        <Input
-          type="text"
-          value={otp}
-          onChange={otpHandleChange}
-          placeholder={t('Enter your one-time passphrase')}
-          size="lg"
-        />
-        <Button type="submit" isLoading={loading} colorScheme="blue" size="md" width="100%">
-          {t('Continue')}
-        </Button>
-        <Button
-          variant="link"
-          onClick={() => {
-            setOtp('')
-            setStep('EnterUsername')
-          }}
-        >
-          {t('Back')}
-        </Button>
-      </VStack>
-    </form>
+        </p>
+      </div>
+      <form onSubmit={continueHandle}>
+        <div className="flex flex-col items-center rounded-lg w-full md:w-8/12 lg:w-[500px] md:p-10 p-5">
+          {/* input */}
+          <div className="relative mt-1 rounded-md shadow-sm my-8 w-full">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <KeyIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
+            <input
+              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm"
+              type="text"
+              value={otp}
+              onChange={otpHandleChange}
+              placeholder={t('Enter your one-time passphrase')}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <CgSpinner className="w-5 h-5 mr-2 animate-spin" />
+                {t('loading')}
+              </>
+            ) : (
+              t('Continue')
+            )}
+          </button>
+          <button
+            className="mt-3 hover:underline underline-offset-2 text-gray-600 hover:text-sky-500"
+            onClick={() => {
+              setOtp('')
+              setStep('EnterUsername')
+            }}
+          >
+            {t('Back')}
+          </button>
+        </div>
+      </form>
+    </>
   )
 }
 
 const LoginPage: NextPage = () => {
   const [step] = useAtom(stepAtom)
   const { t } = useTranslation('common')
-  if (step == 'EnterUsername') {
+  if (step) {
     return (
-      <CenterBox title={t('login')}>
-        <EnterUsername />
-      </CenterBox>
-    )
-  }
-  if (step == 'EnterOtp') {
-    return (
-      <CenterBox title={t('login')}>
-        <EnterOtp />
-      </CenterBox>
+      <Layout
+        title={t('login')}
+        className="flex flex-col h-[calc(100vh_-_120px)] items-center justify-center"
+      >
+        {step == 'EnterUsername' ? <EnterUsername /> : <EnterOtp />}
+        <div className="alert-warn text-sm mt-10 lg:mx-24">
+          {t('DDG Email Panel respects your privacy')}
+        </div>
+      </Layout>
     )
   }
   return <>loading...</>
@@ -272,7 +270,7 @@ const LoginPage: NextPage = () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
-      ...(await serverSideTranslations(ctx.locale || 'en', ['common', 'login'])),
+      ...(await serverSideTranslations(ctx.locale || 'en', ['common'])),
     },
   }
 }
