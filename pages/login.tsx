@@ -79,7 +79,7 @@ const EnterUsername = () => {
         <p className="text-gray-500">{t('login tip')}</p>
       </div>
       <form onSubmit={continueHandle}>
-        <div className="flex flex-col items-center rounded-lg w-full md:w-8/12 lg:w-[500px] md:p-10 p-5">
+        <div className="flex flex-col items-center rounded-lg w-full md:w-[500px] md:p-10 p-5">
           {/* input */}
           <div className="relative mt-1 rounded-md shadow-sm my-8 w-full">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

@@ -1,6 +1,7 @@
 {
   "name": "DDG Email Panel",
   "short_name": "DDG Email Panel",
+  "display_override": ["window-controls-overlay"],
   "icons": [
     {
       "src": "/icons/192x192.png",
