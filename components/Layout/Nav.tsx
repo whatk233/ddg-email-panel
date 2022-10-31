@@ -17,6 +17,7 @@ import {
   CogIcon,
   SunIcon,
   GlobeAltIcon,
+  InformationCircleIcon,
 } from '@heroicons/react/24/outline'
 import { FiGithub } from 'react-icons/fi'
 
@@ -172,7 +173,6 @@ function BottomMenu({
   icon: JSX.Element
   children: React.ReactNode
 }) {
-  const { t } = useTranslation('common')
   return (
     <Menu>
       <Menu.Button
@@ -180,7 +180,7 @@ function BottomMenu({
         className="flex items-center w-full p-2 rounded-md group hover:bg-slate-200 dark:hover:bg-slate-700"
       >
         <span className="w-5">{icon}</span>
-        <span className="pl-3">{t(title)}</span>
+        <span className="pl-3">{title}</span>
       </Menu.Button>
       <Menu.Items className="absolute top-0 w-full h-full overflow-y-auto bg-slate-100 scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-slate-300 scrollbar-thumb-rounded-full scrollbar-track-rounded-full dark:bg-slate-800">
         {children}
@@ -250,7 +250,7 @@ function NavMain() {
         <Image src={DdgLogo} alt="Logo" className="w-12" />
         <span className="ml-4 text-xl">DDG Email Panel</span>
       </div>
-      <div className="flex flex-col justify-between h-[calc(100vh_-_132px)]">
+      <div className="flex flex-col justify-between h-[calc(100vh_-_232px)] md:h-[calc(100vh_-_132px)]">
         <div className="grid items-start gap-1">
           {uRouter.route == '/login'
             ? notLoginNavItem.map((item, index) => <NavLink key={index} {...item} />)
@@ -267,6 +267,24 @@ function NavMain() {
               <BottomMenuItem key={index} href={uRouter.asPath} {...item} />
             ))}
           </BottomMenu>
+          {process.env.NEXT_PUBLIC_GIT_LASTCOMMIT_SHORTHASH && (
+            <BottomMenu
+              title={t(`nav.version`, {
+                shorthash: process.env.NEXT_PUBLIC_GIT_LASTCOMMIT_SHORTHASH,
+              })}
+              icon={<InformationCircleIcon />}
+            >
+              <div className="flex flex-col">
+                <span className="mb-2 font-bold">Info</span>
+                <span className="text-sm">
+                  <span className="block font-bold">Committed Date</span>
+                  <span className="block">
+                    {process.env.NEXT_PUBLIC_GIT_LASTCOMMIT_DATE || ''}
+                  </span>
+                </span>
+              </div>
+            </BottomMenu>
+          )}
         </div>
       </div>
     </>
@@ -299,7 +317,10 @@ export default function Nav() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/25 dark:bg-black/60" onClick={() => setIsOpen(false)} />
+            <div
+              className="fixed inset-0 bg-black/25 dark:bg-black/60"
+              onClick={() => setIsOpen(false)}
+            />
           </Transition.Child>
           <Transition.Child
             enter="transition ease-in-out duration-300"

@@ -8,7 +8,8 @@
       "system":"System",
       "light":"Light",
       "dark":"Dark"
-    }
+    },
+    "version":"Version: {{shorthash}}"
   },
   "DDG Email Panel respects your privacy":"DDG Email Panel(duckduckgo.email) is the open source DuckDuckGo Email Protection panel and is not officially owned by DuckDuckGo, but we still respect your privacy and do not store or sell any personal information",
   "DDG Email Introduction":"DDG Email Panel is the open source unofficial DuckDuckGo Email Protection panel.",

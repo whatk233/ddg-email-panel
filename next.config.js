@@ -5,13 +5,18 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
 })
-const nextConfig = withPWA({
-  experimental: {
-    newNextLinkBehavior: true,
-  },
-  i18n,
-  reactStrictMode: true,
-  swcMinify: true,
-})
+const getGitCommitInfo = require('./utils/getGitCommitInfo')
 
-module.exports = nextConfig
+module.exports = async () => {
+  const nextConfig = getGitCommitInfo(
+    withPWA({
+      experimental: {
+        newNextLinkBehavior: true,
+      },
+      i18n,
+      reactStrictMode: true,
+      swcMinify: true,
+    })
+  )
+  return nextConfig
+}
