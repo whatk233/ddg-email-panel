@@ -20,6 +20,7 @@ specifiers:
   next-connect: 1.0.0-next.3
   next-i18next: ^12.0.0
   next-pwa: ^5.6.0
+  next-themes: ^0.2.1
   node-fetch: ^3.2.10
   postcss: ^8.4.18
   prettier: ^2.7.1
@@ -45,6 +46,7 @@ dependencies:
   next-connect: 1.0.0-next.3
   next-i18next: 12.0.0_r5sq4deac3rmm2d5onhwvomqve
   next-pwa: 5.6.0_next@13.0.0
+  next-themes: 0.2.1_r5sq4deac3rmm2d5onhwvomqve
   node-fetch: 3.2.10
   postcss: 8.4.18
   react: 18.2.0
@@ -3518,6 +3520,18 @@ packages:
       - supports-color
       - uglify-js
       - webpack
+    dev: false
+
+  /next-themes/0.2.1_r5sq4deac3rmm2d5onhwvomqve:
+    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 13.0.0_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next/13.0.0_biqbaboplfbrettd7655fr4n2y:

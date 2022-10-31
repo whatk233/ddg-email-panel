@@ -130,11 +130,12 @@ const NavLink = ({
   const [uid] = useAtom(uidAtom)
   const { t } = useTranslation('common')
   const uRouter = useRouter()
+  const classNames = `flex items-center p-2 rounded-md group hover:bg-slate-200 dark:hover:bg-slate-700`
   if (router) {
     return (
       <button
         type="button"
-        className="flex items-center p-2 rounded-md group hover:bg-slate-200"
+        className={classNames}
         onClick={() => {
           if (router) {
             uRouter.push(`${router}`, {
@@ -150,7 +151,7 @@ const NavLink = ({
   } else {
     return (
       <Link
-        className="flex items-center p-2 rounded-md group hover:bg-slate-200"
+        className={classNames}
         href={href}
         target={href.includes('https://') ? '_blank' : ''}
         rel="noopener noreferrer"
@@ -176,12 +177,12 @@ function BottomMenu({
     <Menu>
       <Menu.Button
         type="button"
-        className="flex items-center w-full p-2 rounded-md group hover:bg-slate-200"
+        className="flex items-center w-full p-2 rounded-md group hover:bg-slate-200 dark:hover:bg-slate-700"
       >
         <span className="w-5">{icon}</span>
         <span className="pl-3">{t(title)}</span>
       </Menu.Button>
-      <Menu.Items className="absolute top-0 w-full h-full overflow-y-auto bg-slate-100 scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-slate-300 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+      <Menu.Items className="absolute top-0 w-full h-full overflow-y-auto bg-slate-100 scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-slate-300 scrollbar-thumb-rounded-full scrollbar-track-rounded-full dark:bg-slate-800">
         {children}
       </Menu.Items>
     </Menu>
@@ -190,8 +191,8 @@ function BottomMenu({
 
 function BottomMenuItem({ icon, title, href, locale, handle }: BottomNavItem) {
   const { t } = useTranslation('common')
-  const classNames = `w-full group flex items-center rounded-md p-2`
-  const activeClassNames = `bg-slate-200`
+  const classNames = `w-full group flex items-center rounded-md p-2 dark:hover:bg-slate-700`
+  const activeClassNames = `bg-slate-200 dark:hover:bg-slate-700`
   const attrs = {} as {
     locale: string
     onClick: () => void
@@ -233,7 +234,7 @@ export function NavSwitch() {
       onClick={() => {
         setIsOpen(!isOpen)
       }}
-      className="w-8 p-1 rounded lg:hidden hover:bg-slate-100"
+      className="w-8 p-1 rounded lg:hidden hover:bg-slate-100 dark:hover:bg-slate-700"
     >
       <Bars3Icon className="fill-slate-700" />
     </button>
@@ -252,24 +253,8 @@ function NavMain() {
       <div className="flex flex-col justify-between h-[calc(100vh_-_132px)]">
         <div className="grid items-start gap-1">
           {uRouter.route == '/login'
-            ? notLoginNavItem.map((item, index) => (
-              <NavLink
-                key={index}
-                title={item.title}
-                href={item.href}
-                icon={item.icon}
-                router={item.router}
-              />
-            ))
-            : navItem.map((item, index) => (
-              <NavLink
-                key={index}
-                title={item.title}
-                href={item.href}
-                icon={item.icon}
-                router={item.router}
-              />
-            ))}
+            ? notLoginNavItem.map((item, index) => <NavLink key={index} {...item} />)
+            : navItem.map((item, index) => <NavLink key={index} {...item} />)}
         </div>
         <div className="relative">
           <BottomMenu title={t('nav.theme')} icon={<MoonIcon />}>
@@ -314,7 +299,7 @@ export default function Nav() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/25" onClick={() => setIsOpen(false)} />
+            <div className="fixed inset-0 bg-black/25 dark:bg-black/60" onClick={() => setIsOpen(false)} />
           </Transition.Child>
           <Transition.Child
             enter="transition ease-in-out duration-300"
@@ -324,7 +309,7 @@ export default function Nav() {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <aside className="z-10 w-64 min-h-screen p-5 overflow-hidden shrink-0 bg-slate-100">
+            <aside className="z-10 w-64 min-h-screen p-5 overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-800 dark:text-slate-300">
               <NavMain />
             </aside>
           </Transition.Child>
@@ -333,7 +318,7 @@ export default function Nav() {
 
       {/* PC */}
       <aside
-        className={`hidden lg:block min-h-screen overflow-hidden shrink-0 w-64 p-5 bg-slate-100`}
+        className={`hidden lg:block min-h-screen overflow-hidden shrink-0 w-64 p-5 bg-slate-100 dark:bg-slate-800 dark:text-slate-300`}
       >
         <NavMain />
       </aside>

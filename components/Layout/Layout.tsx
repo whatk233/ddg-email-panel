@@ -24,18 +24,23 @@ export default function Layout({
         <meta property="og:description" content={t('DDG Email Introduction')} />
         <meta name="description" content={t('DDG Email Introduction')} />
       </Head>
-      <div className="flex relative flex-row overflow-hidden h-screen">
+      <div className="relative flex flex-row h-screen overflow-hidden dark:bg-slate-900 dark:text-slate-300">
         {/* nav */}
         <Nav />
-        <main className="overflow-auto w-full">
-          <div className="flex items-center px-4 bg-white h-14 w-full">
+        <main className="w-full overflow-auto">
+          <div className="flex items-center w-full px-4 bg-white dark:bg-slate-900 h-14">
             <NavSwitch />
-            <div className="lg:hidden ml-2">DDG Email Panel</div>
+            <div className="ml-2 lg:hidden">DDG Email Panel</div>
           </div>
           <div className={`px-8 py-4 ${className ? className : ''}`}>{children}</div>
         </main>
       </div>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className:
+            'dark:bg-slate-800 dark:text-slate-300 dark:border-2 dark:border-slate-700 dark:shadow-xl',
+        }}
+      />
     </>
   )
 }

@@ -32,7 +32,7 @@ const CopyBtn = ({ text, disabled = false }: { text: string; disabled?: boolean 
   const [status, setStatus] = useState<boolean>(true)
   return (
     <button
-      className="flex items-center justify-center bg-sky-600 text-white px-2 py-1 h-8 rounded-md shadow text-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+      className="flex items-center justify-center h-8 px-2 py-1 text-sm text-white rounded-md shadow dark:text-slate-300 bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-600 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 dark:disabled:bg-slate-400 hover:disabled:bg-slate-400 dark:hover:disabled:bg-slate-400 disabled:cursor-not-allowed"
       disabled={!status || disabled}
       onClick={() => {
         setStatus(false)
@@ -99,7 +99,7 @@ const Email = () => {
             <p className="font-medium">{t('Private Duck Address')}</p>
             <div className="flex justify-between">
               {userInfo?.nextAlias == '' ? (
-                <div className="max-w-sm animate-pulse h-3 my-3 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4" />
+                <div className="w-48 h-3 max-w-sm my-3 mb-4 bg-gray-200 rounded-full animate-pulse dark:bg-gray-700" />
               ) : (
                 <p className="text-xl">{`${userInfo?.nextAlias}@duck.com`}</p>
               )}
@@ -110,7 +110,7 @@ const Email = () => {
             </div>
           </div>
           <button
-            className={`flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed`}
+            className={`flex items-center justify-center bg-sky-600 hover:bg-sky-500 dark:text-slate-300 dark:bg-sky-700 dark:hover:bg-sky-600 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 hover:disabled:bg-slate-400 disabled:cursor-not-allowed`}
             disabled={generateBtnStatus}
             onClick={() => {
               generateAddressesHandle()
@@ -123,10 +123,10 @@ const Email = () => {
             )}
             {t('Generate Private Duck Address')}
           </button>
-          <div className="alert-success m-0">
+          <div className="m-0 alert-success">
             {t('For untrusted websites, Privacy Duck Addresses can hide your email identity')}
           </div>
-          <div className="alert-warn m-0 text-sm">{t('DDG Email Panel respects your privacy')}</div>
+          <div className="m-0 text-sm alert-warn">{t('DDG Email Panel respects your privacy')}</div>
         </div>
       </Layout>
     )

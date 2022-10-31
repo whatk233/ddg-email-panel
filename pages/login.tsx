@@ -81,19 +81,19 @@ const EnterUsername = () => {
       <form onSubmit={continueHandle}>
         <div className="flex flex-col items-center rounded-lg w-full md:w-[500px] md:p-10 p-5">
           {/* input */}
-          <div className="relative mt-1 rounded-md shadow-sm my-8 w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <EnvelopeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <div className="relative w-full my-8 mt-1 rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <EnvelopeIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
             </div>
             <input
               type="text"
               value={username}
               onChange={usernameHandleChange}
               placeholder={t('Duck Address')}
-              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm dark:border-gray-500 dark:bg-gray-900 dark:text-slate-400"
             />
             <div className="absolute inset-y-0 right-0 flex items-center">
-              <span className="h-full inline-flex items-center px-3 rounded-r-md border border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+              <span className="inline-flex items-center h-full px-3 text-gray-500 border border-gray-300 dark:border-gray-500 rounded-r-md bg-gray-50 dark:bg-gray-800 dark:text-slate-400 sm:text-sm">
                 @duck.com
               </span>
             </div>
@@ -101,7 +101,7 @@ const EnterUsername = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="flex items-center justify-center w-full px-4 py-2 text-white rounded-md shadow dark:text-slate-300 bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 dark:disabled:bg-slate-400 hover:disabled:bg-slate-400 dark:hover:disabled:bg-slate-400 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
@@ -114,7 +114,7 @@ const EnterUsername = () => {
           </button>
           <Link
             href="https://duckduckgo.com/email/start"
-            className="mt-3 hover:underline underline-offset-2 text-gray-600 hover:text-sky-500"
+            className="mt-3 text-gray-600 hover:underline underline-offset-2 hover:text-sky-500 dark:text-gray-500"
             target="_blank"
             passHref
             rel="noopener noreferrer"
@@ -207,12 +207,12 @@ const EnterOtp = () => {
       <form onSubmit={continueHandle}>
         <div className="flex flex-col items-center rounded-lg w-full md:w-8/12 lg:w-[500px] md:p-10 p-5">
           {/* input */}
-          <div className="relative mt-1 rounded-md shadow-sm my-8 w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <KeyIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <div className="relative w-full my-8 mt-1 rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <KeyIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
             </div>
             <input
-              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm dark:border-gray-500 dark:bg-gray-900 dark:text-slate-400"
               type="text"
               value={otp}
               onChange={otpHandleChange}
@@ -222,7 +222,7 @@ const EnterOtp = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center justify-center bg-sky-600 hover:bg-sky-500 shadow rounded-md px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="flex items-center justify-center w-full px-4 py-2 text-white rounded-md shadow dark:text-slate-300 bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 dark:disabled:bg-slate-400 hover:disabled:bg-slate-400 dark:hover:disabled:bg-slate-400 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
@@ -234,7 +234,7 @@ const EnterOtp = () => {
             )}
           </button>
           <button
-            className="mt-3 hover:underline underline-offset-2 text-gray-600 hover:text-sky-500"
+            className="mt-3 text-gray-600 hover:underline underline-offset-2 hover:text-sky-500"
             onClick={() => {
               setOtp('')
               setStep('EnterUsername')
@@ -258,7 +258,7 @@ const LoginPage: NextPage = () => {
         className="flex flex-col h-[calc(100vh_-_120px)] items-center justify-center"
       >
         {step == 'EnterUsername' ? <EnterUsername /> : <EnterOtp />}
-        <div className="alert-warn text-sm mt-10 lg:mx-24">
+        <div className="mt-10 text-sm alert-warn lg:mx-24">
           {t('DDG Email Panel respects your privacy')}
         </div>
       </Layout>
