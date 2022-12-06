@@ -23,7 +23,7 @@
 * 夜间模式
 
 ## 🌏 在线使用
-[DDG Email Panel](https://duckduckgo.email)
+[DDG Email Panel](http://ddgep.whatk.me/)
 
 ## 🚀 快速部署
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fduckduckgo.email)
