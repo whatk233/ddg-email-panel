@@ -1,0 +1,15 @@
+{
+  "Enter your Duck Address":"あなたのDuckアドレスを入力してください",
+  "Duck Address":"Duckアドレス",
+  "No Duck Address":"Duckアドレスが無い場合は、こちらから登録してください",
+  "Continue":"続ける",
+  "Duck Address cannot be empty":"Duckアドレスの入力は必須です",
+  "Duck Address can only contain letters and numbers":"Duckアドレスにはアルファベットと数字のみが使用できます。",
+  "Check your inbox":"メールのインボックスを確認してください",
+  "DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue":"あなたのメールアドレスにDuckDuckGoからログイン用のワンタイムパスフレーズが送信されました。以下に入力して続けてください。",
+  "Enter your one-time passphrase":"パスフレーズを入力してください",
+  "Back":"戻る",
+  "One-time Passphrase cannot be empty":"パスフレーズの入力は必須です",
+  "Login failed":"ログインに失敗しました",
+  "Unauthorized":"パスフレーズが一致していないか、失効しています。もう一度やり直してください。"
+}

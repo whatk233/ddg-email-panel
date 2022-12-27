@@ -31,6 +31,7 @@ export default function SwitchLang({ ...prop }) {
       <MenuList>
         <SwitchBtn text="English" href={router.asPath} locale="en" />
         <SwitchBtn text="简体中文" href={router.asPath} locale="zh-CN" />
+        <SwitchBtn text="日本語" href={router.asPath} locale="ja-JP" />
       </MenuList>
     </Menu>
   )
