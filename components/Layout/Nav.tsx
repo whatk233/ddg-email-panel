@@ -115,6 +115,14 @@ const languageSwitchItems: BottomNavItem[] = [
       setCookie('NEXT_LOCALE', 'zh-CN')
     },
   },
+  {
+    icon: <GlobeAltIcon />,
+    title: '日本語',
+    locale: 'ja-JP',
+    handle: () => {
+      setCookie('NEXT_LOCALE', 'ja-JP')
+    },
+  },
 ]
 
 const NavLink = ({
