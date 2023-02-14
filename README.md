@@ -11,16 +11,17 @@
 ## ⭐ Features
 * No need to install DuckDuckGo browser extension
 * Supports all modern browsers
+* PWA
 * Generate new privacy aliases
 * No user information is stored on the server side
 * Multi-language support
+* Night Mode
 
 ## 📒 Todo
 * Multi-account management
 * History alias management, notes
 * Change forwarding address
 * DuckDuckGo Email account cancellation
-* Night Mode
 
 ## 🌏 Online Use
 [DDG Email Panel](http://ddgep.whatk.me/)

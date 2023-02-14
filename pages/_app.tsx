@@ -1,13 +1,13 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ThemeProvider } from 'next-themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
+    <ThemeProvider attribute="class" enableColorScheme={false}>
       <Component {...pageProps} />
-    </ChakraProvider>
+    </ThemeProvider>
   )
 }
 

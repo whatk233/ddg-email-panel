@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* livvic-regular */
 @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;500;700;800;900&display=swap');
 
@@ -7,4 +11,48 @@ body {
     HarmonyOS Sans SC, MiSans, Hiragino Sans GB, WenQuanYi Micro Hei, Noto Sans CJK SC, Noto Sans SC,
     Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;
+}
+
+@layer base {
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  kbd {
+    @apply rounded border border-b-2 border-gray-300 border-b-gray-600/60 bg-gray-50 px-1 text-black shadow;
+  }
+
+  .alert-base {
+    @apply my-5 rounded border shadow dark:shadow-lg;
+  }
+
+  .alert-success {
+    @apply alert-base border-green-500 bg-[#e8ffea] p-4 text-green-600 shadow-green-500/30 dark:bg-[#e8ffea]/70 dark:shadow-green-500/30;
+  }
+
+  .alert-info {
+    @apply alert-base border-sky-500 bg-blue-100 p-4 text-sky-600 shadow-sky-500/30 dark:bg-sky-100/70 dark:shadow-sky-500/30;
+  }
+
+  .alert-warn {
+    @apply alert-base border-yellow-500 bg-yellow-100 p-4 text-yellow-600 shadow-yellow-500/30 dark:bg-yellow-100/70 dark:text-yellow-700 dark:shadow-yellow-500/30;
+  }
+
+  .alert-error {
+    @apply alert-base border-red-500 bg-red-100 p-4 text-red-600 shadow-red-500/30 dark:bg-red-100/70 dark:text-red-700 dark:shadow-red-500/30;
+  }
 }
