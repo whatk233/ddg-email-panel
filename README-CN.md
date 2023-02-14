@@ -11,19 +11,20 @@
 ## ⭐ 特性
 * 无需安装 DuckDuckGo 浏览器扩展
 * 支持所有现代浏览器
+* PWA
 * 生成新的隐私别名
 * 服务端不存储任何用户信息
 * 多语言支持
+* 夜间模式
 
 ## 📒 Todo
 * 多账户管理
 * 历史别名管理、备注
 * 修改转发地址
 * DuckDuckGo Email 账户注销
-* 夜间模式
 
 ## 🌏 在线使用
-[DDG Email Panel](https://duckduckgo.email)
+[DDG Email Panel](http://ddgep.whatk.me)
 
 ## 🚀 快速部署
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fduckduckgo.email)
