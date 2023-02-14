@@ -49,7 +49,6 @@ const CopyBtn = ({ text, disabled = false }: { text: string; disabled?: boolean 
 }
 
 const Email = () => {
-  // const router = useRouter()
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
   const [generateBtnStatus, setGenerateBtnStatus] = useState<boolean>(false)
   const { t } = useTranslation('common')
@@ -75,11 +74,6 @@ const Email = () => {
         setGenerateBtnStatus(false)
       })
   }
-
-  // const signOutHandle = () => {
-  //   store.clear()
-  //   router.reload()
-  // }
 
   if (userInfo) {
     return (

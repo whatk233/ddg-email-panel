@@ -7,7 +7,7 @@ import { atom, useAtom } from 'jotai'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { setCookie } from 'cookies-next'
-import DdgLogo from '../../public/dax-logo.svg'
+import Logo from '../../public/logo.svg'
 import {
   LanguageIcon,
   MoonIcon,
@@ -255,7 +255,7 @@ function NavMain() {
   return (
     <>
       <div className="flex items-center justify-center pb-8">
-        <Image src={DdgLogo} alt="Logo" className="w-12" />
+        <Image src={Logo} alt="Logo" className="w-12" />
         <span className="ml-4 text-xl">DDG Email Panel</span>
       </div>
       <div className="flex flex-col justify-between h-[calc(100vh_-_232px)] md:h-[calc(100vh_-_132px)]">
