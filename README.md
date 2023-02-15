@@ -8,6 +8,11 @@
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=Vercel&logoColor=white) ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel?style=for-the-badge) 
 
+> **Warning**
+> DDG Email Panel is a community open-source management panel for DuckDuckGo Email Protection. Although it is not officially owned by DuckDuckGo, we still respect your privacy and will not store or sell any personal information.
+> 
+> However, since DDG Email Panel is an open-source project, anyone can deploy it. Therefore, we cannot guarantee that publicly deployed sites can be trusted. To ensure your privacy and security, we strongly recommend that you use our hosted site or self-host DDG Email Panel.
+
 ## ⭐ Features
 * No need to install DuckDuckGo browser extension
 * Supports all modern browsers
@@ -23,11 +28,13 @@
 * Change forwarding address
 * DuckDuckGo Email account cancellation
 
-## 🌏 Online Use
+## 🌏 Our hosted
 [DDG Email Panel](http://ddgep.whatk.me/)
+[DDG Email Panel (vercel.app subdomain)](https://ddgep.vercel.app/)
+
 
 ## 🚀 Quick Deployment
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fduckduckgo.email)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fddgep.whatk.me)
 
 ## 🔧 Local Deployment
 
