@@ -8,7 +8,7 @@
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=Vercel&logoColor=white) ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel?style=for-the-badge) 
 
-> **Warning**		
+> **Warning**   
 > DDG Email Panel is a community open-source management panel for DuckDuckGo Email Protection. Although it is not officially owned by DuckDuckGo, we still respect your privacy and will not store or sell any personal information.
 > 
 > DDG Email Panel is an open-source project, anyone can deploy it. Therefore, we cannot guarantee that publicly deployed sites can be trusted. To ensure your privacy and security, we strongly recommend that you use our hosted site or self-host DDG Email Panel.
@@ -29,8 +29,8 @@
 * DuckDuckGo Email account cancellation
 
 ## 🌏 Our hosted
-[DDG Email Panel](http://ddgep.whatk.me/)		
-[DDG Email Panel (vercel.app subdomain)](https://ddgep.vercel.app/)
+* [DDG Email Panel](http://ddgep.whatk.me/)
+* [DDG Email Panel (vercel.app subdomain)](https://ddgep.vercel.app/)
 
 
 ## 🚀 Quick Deployment
