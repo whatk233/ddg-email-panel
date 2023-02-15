@@ -11,7 +11,7 @@
 > **Warning**		
 > DDG Email Panel 是一个由社区开源的 DuckDuckGo Email Protection 管理面板，虽然不属于 DuckDuckGo 官方 ，但我们仍然会尊重您的隐私，不会存储或出售任何个人信息。
 > 
-> 然而，由于 DDG Email Panel 是一个开源项目，任何人都可以部署它。因此，我们无法保证公开部署的站点能被信任。为了确保您的隐私和安全，我们强烈建议您使用我们的托管的站点或自行部署 DDG Email Panel。
+> 由于 DDG Email Panel 是一个开源项目，任何人都可以部署它。因此，我们无法保证公开部署的站点能被信任。为了确保您的隐私和安全，我们强烈建议您使用我们的托管的站点或自行部署 DDG Email Panel。
 
 ## ⭐ 特性
 * 无需安装 DuckDuckGo 浏览器扩展
