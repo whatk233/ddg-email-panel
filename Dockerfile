@@ -1,8 +1,10 @@
-FROM node:latest
-RUN mkdir /app
+FROM node:16
+
 WORKDIR /app
-COPY . /app
-RUN npm install
-RUN npm run build
+COPY . .
+
+RUN npm install  && npm run build
+
 EXPOSE 3000
-CMD ["npm","start"]
+
+CMD ["npm", "start"]
