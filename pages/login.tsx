@@ -39,7 +39,7 @@ const loginRequest = (username: string, otp: string) => {
 }
 
 const EnterUsername = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const [username, setUsername] = useAtom(usernameAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
   const [, setStep] = useAtom(stepAtom)
@@ -128,7 +128,7 @@ const EnterUsername = () => {
 }
 
 const EnterOtp = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const [username] = useAtom(usernameAtom)
   const [otp, setOtp] = useAtom(otpAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
@@ -250,7 +250,7 @@ const EnterOtp = () => {
 
 const LoginPage: NextPage = () => {
   const [step] = useAtom(stepAtom)
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   if (step) {
     return (
       <Layout
