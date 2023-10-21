@@ -9,7 +9,7 @@ import * as store from '../utils/store'
 
 const EmailPage: NextPage = () => {
   const router = useRouter()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
 
   useEffect(() => {
     const { id } = router.query

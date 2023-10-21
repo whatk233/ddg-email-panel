@@ -28,7 +28,7 @@ const Loading = () => {
 }
 
 const CopyBtn = ({ text, disabled = false }: { text: string; disabled?: boolean }) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const [status, setStatus] = useState<boolean>(true)
   return (
     <button
@@ -51,7 +51,7 @@ const CopyBtn = ({ text, disabled = false }: { text: string; disabled?: boolean 
 const Email = () => {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
   const [generateBtnStatus, setGenerateBtnStatus] = useState<boolean>(false)
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const generateAddressesHandle = () => {
     setGenerateBtnStatus(true)
     generateAddresses(userInfo?.access_token || '')

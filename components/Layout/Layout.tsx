@@ -12,7 +12,7 @@ export default function Layout({
   className?: string | undefined
   title: string
 }) {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   return (
     <>
       <Head>

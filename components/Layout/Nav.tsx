@@ -137,7 +137,7 @@ const NavLink = ({
   router?: string
 }) => {
   const [uid] = useAtom(uidAtom)
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const uRouter = useRouter()
   const classNames = `flex items-center p-2 rounded-md group hover:bg-slate-200 dark:hover:bg-slate-700`
   if (router) {
@@ -198,7 +198,7 @@ function BottomMenu({
 }
 
 function BottomMenuItem({ icon, title, href, locale, handle }: BottomNavItem) {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const classNames = `w-full group flex items-center rounded-md p-2 dark:hover:bg-slate-700`
   const activeClassNames = `bg-slate-200 dark:hover:bg-slate-700`
   const attrs = {} as {
@@ -251,12 +251,12 @@ export function NavSwitch() {
 
 function NavMain() {
   const uRouter = useRouter()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   return (
     <>
       <div className="flex items-center justify-center pb-8">
         <Image src={Logo} alt="Logo" className="w-12" />
-        <span className="ml-4 text-xl">DDG Email Panel</span>
+        <span className="ml-4 text-lg">DDG Email Panel</span>
       </div>
       <div className="flex flex-col justify-between h-[calc(100vh_-_232px)] md:h-[calc(100vh_-_132px)]">
         <div className="grid items-start gap-1">

@@ -18,6 +18,7 @@ const usernameAtom = atom<string>('')
 const otpAtom = atom<string>('')
 const loadingAtom = atom<boolean>(false)
 const stepAtom = atom<'EnterUsername' | 'EnterOtp'>('EnterUsername')
+const loginMethodAtom = atom<'username' | 'token'>('username')
 
 const otpRequest = (username: string) => {
   return fetch(`/api/auth/loginlink`, {
@@ -39,10 +40,11 @@ const loginRequest = (username: string, otp: string) => {
 }
 
 const EnterUsername = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const [username, setUsername] = useAtom(usernameAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
   const [, setStep] = useAtom(stepAtom)
+  const [, setLoginMethod] = useAtom(loginMethodAtom)
 
   const usernameHandleChange = (event: { target: { value: string } }) =>
     setUsername(event.target.value)
@@ -59,6 +61,7 @@ const EnterUsername = () => {
     setLoading(true)
     otpRequest(username)
       .then(() => {
+        setLoginMethod('username')
         setStep('EnterOtp')
       })
       .catch((res) => {
@@ -71,6 +74,18 @@ const EnterUsername = () => {
         return
       })
       .finally(() => setLoading(false))
+  }
+  const continueUseTokenHandle = () => {
+    if (username == '') {
+      toast.error(t('Duck Address cannot be empty'))
+      return
+    }
+    if (!USERNAME_REGEX.test(username)) {
+      toast.error(t('Duck Address can only contain letters and numbers'))
+      return
+    }
+    setLoginMethod('token')
+    setStep('EnterOtp')
   }
   return (
     <>
@@ -98,20 +113,30 @@ const EnterUsername = () => {
               </span>
             </div>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex items-center justify-center w-full px-4 py-2 text-white rounded-md shadow dark:text-slate-300 bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 dark:disabled:bg-slate-400 hover:disabled:bg-slate-400 dark:hover:disabled:bg-slate-400 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <>
-                <CgSpinner className="w-5 h-5 mr-2 animate-spin" />
-                {t('loading')}
-              </>
-            ) : (
-              t('login')
-            )}
-          </button>
+          <div className="grid grid-cols-1 divide-y-2 w-full">
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex items-center justify-center w-full px-4 py-2 text-white rounded-md shadow dark:text-slate-300 bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-600 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600 disabled:bg-slate-400 dark:disabled:bg-slate-400 hover:disabled:bg-slate-400 dark:hover:disabled:bg-slate-400 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <>
+                  <CgSpinner className="w-5 h-5 mr-2 animate-spin" />
+                  {t('loading')}
+                </>
+              ) : (
+                t('login')
+              )}
+            </button>
+            <a
+              onClick={() => {
+                continueUseTokenHandle()
+              }}
+              className="flex items-center justify-center w-full px-4 py-2 text-sky-600 hover:underline underline-offset-2 dark:text-slate-300 cursor-pointer"
+            >
+              {t('Login using Access Token')}
+            </a>
+          </div>
           <Link
             href="https://duckduckgo.com/email/start"
             className="mt-3 text-gray-600 hover:underline underline-offset-2 hover:text-sky-500 dark:text-gray-500"
@@ -128,11 +153,12 @@ const EnterUsername = () => {
 }
 
 const EnterOtp = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   const [username] = useAtom(usernameAtom)
   const [otp, setOtp] = useAtom(otpAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
   const [, setStep] = useAtom(stepAtom)
+  const [loginMethod] = useAtom(loginMethodAtom)
   const router = useRouter()
 
   const otpHandleChange = (event: { target: { value: string } }) => setOtp(event.target.value)
@@ -143,6 +169,34 @@ const EnterOtp = () => {
       return
     }
     setLoading(true)
+    // using token
+    if (loginMethod === 'token') {
+      const user = {
+        access_token: otp,
+        cohort: '',
+        email: '',
+        username,
+      }
+      // generate alias
+      generateAddresses(user.access_token)
+        .then((res) => {
+          const userIndex = store.addAccount({
+            ...user,
+            remark: maskEmail(user.email),
+            nextAlias: res.address,
+          })
+          // redirect
+          router.push(`/email/?id=${userIndex}`)
+          toast.success(t('Login Success'))
+        })
+        .catch((res) => {
+          console.log('generate alias error', res)
+          toast.error(t('The access token cannot generate an alias'))
+          setLoading(false)
+          return
+        })
+      return
+    }
     loginRequest(username, otp.trim())
       .then((res) => {
         const { user } = res as {
@@ -197,10 +251,20 @@ const EnterOtp = () => {
   return (
     <>
       <div className="text-center">
-        <h4>{t('Check your inbox')}</h4>
+        <h4>{loginMethod === 'username' ? t('Check your inbox') : t('Enter your Access Token')}</h4>
         <p className="text-gray-500">
-          {t(
-            'DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue'
+          {loginMethod === 'username' ? (
+            t(
+              'DuckDuckGo One-time Passphrase has been sent to your email address, please enter it below and continue'
+            )
+          ) : (
+            <Link
+              className="mt-2 underline underline-offset-2 hover:text-sky-500"
+              href="https://bitwarden.com/help/generator/#tab-duckduckgo-3Uj911RtQsJD9OAhUuoKrz"
+              target="_blank"
+            >
+              {t('How to obtain a Token')}
+            </Link>
           )}
         </p>
       </div>
@@ -212,11 +276,15 @@ const EnterOtp = () => {
               <KeyIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
             </div>
             <input
-              className="block w-full rounded-md border-gray-300 pl-10 pr-[98px] focus:border-slate-500 focus:ring-slate-500 sm:text-sm dark:border-gray-500 dark:bg-gray-900 dark:text-slate-400"
+              className="block w-full rounded-md border-gray-300 pl-10 pr-10 focus:border-slate-500 focus:ring-slate-500 sm:text-sm dark:border-gray-500 dark:bg-gray-900 dark:text-slate-400"
               type="text"
               value={otp}
               onChange={otpHandleChange}
-              placeholder={t('Enter your one-time passphrase')}
+              placeholder={
+                loginMethod === 'username'
+                  ? t('Enter your one-time passphrase')
+                  : t('Enter your Access Token')
+              }
             />
           </div>
           <button
@@ -250,7 +318,7 @@ const EnterOtp = () => {
 
 const LoginPage: NextPage = () => {
   const [step] = useAtom(stepAtom)
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('')
   if (step) {
     return (
       <Layout
