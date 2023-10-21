@@ -256,7 +256,7 @@ function NavMain() {
     <>
       <div className="flex items-center justify-center pb-8">
         <Image src={Logo} alt="Logo" className="w-12" />
-        <span className="ml-4 text-xl">DDG Email Panel</span>
+        <span className="ml-4 text-lg">DDG Email Panel</span>
       </div>
       <div className="flex flex-col justify-between h-[calc(100vh_-_232px)] md:h-[calc(100vh_-_132px)]">
         <div className="grid items-start gap-1">
