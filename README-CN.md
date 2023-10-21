@@ -6,7 +6,8 @@
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/ddg-email-panel?style=social)
 
-![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=Vercel&logoColor=white) ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel?style=for-the-badge) 
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=Vercel&logoColor=white) ![GitHub](https://img.shields.io/github/license/whatk233/ddg-email-panel?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/whatk233/ddg-email-panel?style=for-the-badge)
+
 
 > **Warning**   
 > DDG Email Panel 是一个由社区开源的 DuckDuckGo Email Protection 管理面板，虽然不属于 DuckDuckGo 官方 ，但我们仍然会尊重您的隐私，不会存储或出售任何个人信息。
@@ -34,6 +35,11 @@
 
 ## 🚀 快速部署
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwhatk233%2Fddg-email-panel&demo-title=DDG%20Email%20Panel&demo-description=DDG%20Email%20Panel%20is%20the%20open%20source%20unofficial%20DuckDuckGo%20Email%20Protection%20panel.&demo-url=https%3A%2F%2Fduckduckgo.email)
+
+## ⚓ Docker 部署
+```shell
+docker run -d --restart=always -p 3000:3000 --name ddg-email-panel whatk233/ddg-email-panel
+```
 
 ## 🔧 本地部署
 
